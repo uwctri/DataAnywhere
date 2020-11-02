@@ -1,0 +1,85 @@
+{
+    "name": "Data Anywhere",
+    "description": "Load, as a JS object, data from other instruments or events into other specific instruments and events.",
+    "namespace": "UWMadison\\DataAnywhere",
+    "authors": [
+        {
+            "name": "Adam Nunez",
+            "email": "Adam.Nunez@ctri.wisc.edu",
+            "institution": "UW Madison - Center for Tobacco Research and Intervention "
+        }
+    ],
+    "permissions": [
+        "redcap_data_entry_form_top",
+        "redcap_every_page_top"
+    ],
+    "framework-version": 3,
+    "project-settings": [
+        {
+            "key": "descriptive",
+            "name": "Note: For simplicity neither repeating instruments or multi source/destinations are currently supported. These will likely be added in the future.",
+            "type": "descriptive"
+        },
+        {
+             "key": "group",
+             "name": "<b>Data Share</b>",
+             "type": "sub_settings",
+             "repeatable":true,
+             "sub_settings":[
+                {
+                    "key": "source-all",
+                    "name": "<b>Data to share</b>",
+                    "type": "radio",
+                    "choices": [
+                        {
+                            "name": "Specific Event/Instrument",
+                            "value": 0
+                        },
+                        {
+                            "name": "All Data",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "key": "source-event",
+                    "name": "<b>Source Event</b><br>Leave blank to pull data from all events",
+                    "type": "event-list"
+                },
+                {
+                    "key": "source-instrument",
+                    "name": "<b>Source Instrument</b><br>Leave blank to pull data from all instruments",
+                    "type": "form-list"
+                },
+                {
+                    "key": "destination-all",
+                    "name": "<b>Share to</b>",
+                    "type": "radio",
+                    "choices": [
+                        {
+                            "name": "Specific Event/Instrument",
+                            "value": 0
+                        },
+                        {
+                            "name": "All Events & Instruments",
+                            "value": 1
+                        }
+                    ]
+                },
+                {
+                    "key": "destination-event",
+                    "name": "<b>Destination Event</b><br>Leave blank to push data to all events",
+                    "type": "event-list"
+                },
+                {
+                    "key": "destination-instrument",
+                    "name": "<b>Destination Instrument</b><br>Leave blank to push data to all instruments",
+                    "type": "form-list"
+                }
+            ]
+        }
+    ],
+    "compatibility": {
+        "redcap-version-min": "10.0.0"
+    }
+}
