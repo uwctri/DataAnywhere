@@ -46,7 +46,8 @@ class DataAnywhere extends AbstractExternalModule {
                 $srcInst   = $settings['source-instrument']['value'][$index];
                 $srcEvent = $srcAll ? null : $srcEvent;
                 $fields = $srcAll ? null : REDCap::getFieldNames($srcInst);
-                $data = $data + REDCap::getData($project_id,'array',$record,$fields,$srcEvent)[$record];
+                $tmp  = REDCap::getData($project_id,'array',$record,$fields,$srcEvent);
+                $data = $data + $tmp ? $tmp[$record] : [];
             }
         }
         if ( !empty($data) )
