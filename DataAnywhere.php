@@ -50,8 +50,10 @@ class DataAnywhere extends AbstractExternalModule {
                 $data = $data + $tmp ? $tmp[$record] : [];
             }
         }
-        if ( !empty($data) )
+        if ( !empty($data) ) {
             $this->passArgument('data',$data);
+            $this->passArgument('eventNames',REDCap::getEventNames(true));
+        }
     }
     
     private function initGlobal() {
