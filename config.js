@@ -14,7 +14,7 @@ $(document).ready(function() {
             if ($modal.data('module') !== DataAnywhere.modulePrefix)
                 return;
             
-            // Basic cleanup
+            // Cleanup layout and do some branching logic
             $modal.find('thead').remove();
             $modal.find('input[name^=source-all___]').on('click', function() {
                 $(this).closest('tr').nextUntil('tr[field=destination-all]').show();
@@ -27,6 +27,7 @@ $(document).ready(function() {
                     $(this).closest('tr').nextUntil('.sub_end').hide();
             });
             $modal.find('input:checked').click();
+            
         };
     });
 
@@ -34,10 +35,7 @@ $(document).ready(function() {
         // Making sure we are overriding this modules's modal only.
         if ($(this).data('module') !== DataAnywhere.modulePrefix)
             return;
-
         if (typeof ExternalModules.Settings.prototype.resetConfigInstancesOld !== 'undefined')
             ExternalModules.Settings.prototype.resetConfigInstances = ExternalModules.Settings.prototype.resetConfigInstancesOld;
-
-        $modal.removeClass('defaultFormStatusConfig');
     });
 });

@@ -6,19 +6,10 @@ use ExternalModules\ExternalModules;
 
 use REDCap;
 
-function printToScreen($string) {
-    ?><script>console.log(<?=json_encode($string); ?>);</script><?php
-}
-
 class DataAnywhere extends AbstractExternalModule {
     
     private $module_prefix = 'data_anywhere';
     private $module_global = 'DataAnywhere';
-    private $module_name = 'DataAnywhere';
-    
-    public function __construct() {
-        parent::__construct();
-    }
     
     public function redcap_every_page_top($project_id) {
         // Custom Config page
@@ -57,19 +48,20 @@ class DataAnywhere extends AbstractExternalModule {
     }
     
     private function initGlobal() {
-        $data = array(
+        $data = json_encode([
             "modulePrefix" => $this->module_prefix
-        );
-        echo "<script>var ".$this->module_global." = ".json_encode($data).";</script>";
+        ]);
+        echo "<script>var {$this->module_global} = {$data};</script>";
     }
     
     private function passArgument($name, $value) {
-        echo "<script>".$this->module_global.".".$name." = ".json_encode($value).";</script>";
+        echo "<script>{$this->module_global}.{$name} = ".json_encode($value).";</script>";
     }
     
     private function includeJs($path) {
-        echo '<script src="' . $this->getUrl($path) . '"></script>';
+        echo "<script src={$this->getUrl($path)}></script>";
     }
+    
 }
 
 ?>
