@@ -6,15 +6,15 @@ DataAnywhere ships data from other events, specific instruments on other events,
 
 ## Installing
 
-This EM isn't yet available to install via redcap's EM database so you'll need to install to your modules folder (i.e. `redcap/modules/\data_anywhere_v1.0.0`) manually.
+This EM isn't yet available to install via redcap's EM database so you'll need to install to your modules folder (i.e. `redcap/modules/data_anywhere_v1.0.0`) manually.
 
 ## Configuration
 
 Configuration is simple: 
 
-    1. Define data to share - This can be a specifc event or event/instrument combo or all data on the record.
-    2. Define where that data is sent - Same specification as above
-    3. Use data in the `DataAnywhere.data` object, things are organized by event_id and the typical redcap 'repeat_instances' scheme.
+1. Define data to share - This can be a specifc event or event/instrument combo or all data on the record.
+2. Define where that data is sent - Same specification as above
+3. Use data in the `DataAnywhere.data` object, data is organized by event_id and, if applicable, in the typical redcap 'repeat_instances' scheme.
 
 ## Call Outs
 
