@@ -8,7 +8,6 @@ use REDCap;
 
 class DataAnywhere extends AbstractExternalModule {
     
-    private $module_prefix = 'data_anywhere';
     private $module_global = 'DataAnywhere';
     
     public function redcap_every_page_top($project_id) {
@@ -49,7 +48,7 @@ class DataAnywhere extends AbstractExternalModule {
     
     private function initGlobal() {
         $data = json_encode([
-            "modulePrefix" => $this->module_prefix
+            "modulePrefix" => $this->PREFIX
         ]);
         echo "<script>var {$this->module_global} = {$data};</script>";
     }
