@@ -12,7 +12,7 @@ class DataAnywhere extends AbstractExternalModule {
     
     public function redcap_every_page_top($project_id) {
         // Custom Config page
-        if (strpos(PAGE, 'ExternalModules/manager/project.php') !== false && $project_id != NULL) {
+        if (strpos(PAGE, 'manager/project.php') !== false && $project_id != NULL) {
             $this->initGlobal();
             $this->includeJs('config.js');
         }
