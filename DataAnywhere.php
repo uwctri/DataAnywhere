@@ -2,7 +2,6 @@
 
 namespace UWMadison\DataAnywhere;
 use ExternalModules\AbstractExternalModule;
-use ExternalModules\ExternalModules;
 
 use REDCap;
 
