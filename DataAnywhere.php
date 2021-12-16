@@ -22,16 +22,16 @@ class DataAnywhere extends AbstractExternalModule {
         $this->initGlobal();
         $settings = $this->getProjectSettings();
         $data = [];
-        foreach ( $settings['destination-all']['value'] as $index => $destAll ) {
+        foreach ( $settings['destination-all'] as $index => $destAll ) {
             $destAll   = $destAll == "1";
-            $destEvent = $settings['destination-event']['value'][$index];
-            $destInst  = $settings['destination-instrument']['value'][$index];
+            $destEvent = $settings['destination-event'][$index];
+            $destInst  = $settings['destination-instrument'][$index];
             
             if ( $destAll || ( ($destEvent == $event_id) && ($destInst == $instrument) ) || 
             ( empty($destEvent) && ($destInst == $instrument) ) || ( ($destEvent == $event_id) && empty($destInst) ) ) {
-                $srcAll   = $settings['source-all']['value'][$index] == "1";
-                $srcEvent  = $settings['source-event']['value'][$index];
-                $srcInst   = $settings['source-instrument']['value'][$index];
+                $srcAll   = $settings['source-all'][$index] == "1";
+                $srcEvent  = $settings['source-event'][$index];
+                $srcInst   = $settings['source-instrument'][$index];
                 $srcEvent = $srcAll ? null : $srcEvent;
                 $fields = $srcAll ? null : REDCap::getFieldNames($srcInst);
                 $tmp  = REDCap::getData($project_id,'array',$record,$fields,$srcEvent);
