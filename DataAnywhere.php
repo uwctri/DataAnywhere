@@ -12,7 +12,8 @@ class DataAnywhere extends AbstractExternalModule {
         // Custom Config page
         if ( $this->isPage('ExternalModules/manager/project.php') && $project_id != NULL) {
             $this->initGlobal();
-            $this->includeJs('config.js');
+            $url = $this->getUrl('config.js');
+            echo "<script src={$url}></script>";
         }
     }
     
@@ -22,6 +23,8 @@ class DataAnywhere extends AbstractExternalModule {
         $this->initGlobal();
         $settings = $this->getProjectSettings();
         $data = [];
+        
+        // Loop over all of the config, destination-all is arbitrary 
         foreach ( $settings['destination-all'] as $index => $destAll ) {
             $destAll   = $destAll == "1";
             $destEvent = $settings['destination-event'][$index];
@@ -35,12 +38,15 @@ class DataAnywhere extends AbstractExternalModule {
                 $srcEvent = $srcAll ? null : $srcEvent;
                 $fields = $srcAll ? null : REDCap::getFieldNames($srcInst);
                 $tmp  = REDCap::getData($project_id,'array',$record,$fields,$srcEvent);
-                $data = $data + $tmp ? $tmp[$record] : [];
+                //$data = array_merge_recursive($data, $tmp);
+                $data = $data + ($tmp ? $tmp[$record] : []);
             }
         }
+        
+        // Post data down to JS if we have any
         if ( !empty($data) ) {
-            $this->passArgument('data',$data);
-            $this->passArgument('eventNames',REDCap::getEventNames(true));
+            echo "<script>{$this->module_global}.data = ".json_encode($data).";</script>";
+            echo "<script>{$this->module_global}.eventNames = ".json_encode(REDCap::getEventNames(true)).";</script>";
         }
     }
     
@@ -50,15 +56,6 @@ class DataAnywhere extends AbstractExternalModule {
         ]);
         echo "<script>var {$this->module_global} = {$data};</script>";
     }
-    
-    private function passArgument($name, $value) {
-        echo "<script>{$this->module_global}.{$name} = ".json_encode($value).";</script>";
-    }
-    
-    private function includeJs($path) {
-        echo "<script src={$this->getUrl($path)}></script>";
-    }
-    
 }
 
 ?>
