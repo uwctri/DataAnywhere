@@ -38,14 +38,13 @@ class DataAnywhere extends AbstractExternalModule {
                 $srcEvent = $srcAll ? null : $srcEvent;
                 $fields = $srcAll ? null : REDCap::getFieldNames($srcInst);
                 $tmp  = REDCap::getData($project_id,'array',$record,$fields,$srcEvent);
-                //$data = array_merge_recursive($data, $tmp);
-                $data = $data + ($tmp ? $tmp[$record] : []);
+                $data = array_replace_recursive($data, $tmp);
             }
         }
         
         // Post data down to JS if we have any
         if ( !empty($data) ) {
-            echo "<script>{$this->module_global}.data = ".json_encode($data).";</script>";
+            echo "<script>{$this->module_global}.data = ".json_encode($data[$record]).";</script>";
             echo "<script>{$this->module_global}.eventNames = ".json_encode(REDCap::getEventNames(true)).";</script>";
         }
     }
