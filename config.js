@@ -3,14 +3,14 @@ $(document).ready(function () {
     var $modal = $('#external-modules-configure-modal');
     $modal.on('show.bs.modal', function () {
         // Making sure we are overriding this modules's modal only.
-        if ($(this).data('module') !== "DataAnywhere") return;
+        if ($(this).data('module') !== "data_anywhere") return;
 
         if (typeof ExternalModules.Settings.prototype.resetConfigInstancesOld === 'undefined')
             ExternalModules.Settings.prototype.resetConfigInstancesOld = ExternalModules.Settings.prototype.resetConfigInstances;
 
         ExternalModules.Settings.prototype.resetConfigInstances = function () {
             ExternalModules.Settings.prototype.resetConfigInstancesOld();
-            if ($modal.data('module') !== "DataAnywhere") return;
+            if ($modal.data('module') !== "data_anywhere") return;
 
             // Cleanup layout and do some branching logic
             $modal.find('thead').remove();
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
     $modal.on('hide.bs.modal', function () {
         // Making sure we are overriding this modules's modal only.
-        if ($(this).data('module') !== "DataAnywhere") return;
+        if ($(this).data('module') !== "data_anywhere") return;
         if (typeof ExternalModules.Settings.prototype.resetConfigInstancesOld !== 'undefined')
             ExternalModules.Settings.prototype.resetConfigInstances = ExternalModules.Settings.prototype.resetConfigInstancesOld;
     });
