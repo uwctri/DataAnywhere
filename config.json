@@ -13,19 +13,19 @@
         "redcap_data_entry_form_top",
         "redcap_every_page_top"
     ],
-    "framework-version": 8,
+    "framework-version": 10,
     "project-settings": [
         {
             "key": "descriptive",
-            "name": "Note: For simplicity neither repeating instruments or multi source/destinations are currently supported. These will likely be added in the future.",
+            "name": "Event Id to name mappings and username to full name mappings can be found in the js object on any destination instrument.",
             "type": "descriptive"
         },
         {
-             "key": "group",
-             "name": "<b>Data Share</b>",
-             "type": "sub_settings",
-             "repeatable":true,
-             "sub_settings":[
+            "key": "group",
+            "name": "<b>Data Share</b>",
+            "type": "sub_settings",
+            "repeatable": true,
+            "sub_settings": [
                 {
                     "key": "source-all",
                     "name": "<b>Data to share</b>",
@@ -80,6 +80,6 @@
         }
     ],
     "compatibility": {
-        "redcap-version-min": "12.0.0"
+        "redcap-version-min": "12.0.4"
     }
 }
