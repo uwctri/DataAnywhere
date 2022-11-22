@@ -54,12 +54,15 @@ class DataAnywhere extends AbstractExternalModule
 
     private function getUsers()
     {
+        // Framework doesn't return user's real name
         $users = "\"" . implode("\",\"", REDCap::getUsers()) . "\"";
         $sql = "SELECT username, CONCAT(user_firstname, ' ' , user_lastname) as name FROM redcap_user_information WHERE username in ($users)";
         $data = db_query($sql);
         $results = [];
         while ($row = db_fetch_assoc($data)) {
-            $results[$row["username"]] = $row["name"];
+            $user =  htmlspecialchars($row["username"], ENT_QUOTES);
+            $name = htmlspecialchars($row["name"], ENT_QUOTES);
+            $results[$user] = $name;
         }
         return $results;
     }
