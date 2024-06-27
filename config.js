@@ -11,6 +11,7 @@ $(document).ready(function () {
         ExternalModules.Settings.prototype.resetConfigInstances = function () {
             ExternalModules.Settings.prototype.resetConfigInstancesOld();
             if ($modal.data('module') !== "data_anywhere") return;
+            $modal.find(".sub_start td").css("background-color", "#e6e6e6");
 
             // Cleanup layout and do some branching logic
             $modal.find('thead').remove();
