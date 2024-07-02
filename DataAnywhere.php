@@ -45,7 +45,7 @@ class DataAnywhere extends AbstractExternalModule
         // Pass data down to JS if we have any
         if (!empty($data)) {
             echo "<script> var DataAnywhere = " . json_encode([
-                "data" => $data[$record],
+                "data" => $this->escape($data[$record]),
                 "eventNames" => REDCap::getEventNames(true),
                 "usernames" => $this->getUsers()
             ]) . ";</script>";
